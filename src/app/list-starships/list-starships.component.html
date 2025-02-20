@@ -1,0 +1,13 @@
+<p>Hola</p>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-12 col-xl-8 mb-4">
+      <div class="card">
+        @for(ship of spaceships; track ship){
+        <h1>{{ ship.name }}</h1>
+        <h1>{{ ship.model }}</h1>
+        }
+      </div>
+    </div>
+  </div>
+</div>
