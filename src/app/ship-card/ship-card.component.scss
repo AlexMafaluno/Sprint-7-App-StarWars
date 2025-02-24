@@ -1,0 +1,24 @@
+.card {
+    height: 100%; /* Para que el contenido ocupe todo el alto */
+    display: flex;
+    align-items: center; /* Centrar verticalmente */
+  }
+  
+  .imagen {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden; /* Evita desbordes */
+  }
+
+  .imagen img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Ajusta la imagen sin deformarla */
+  }
+
+  .details {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }

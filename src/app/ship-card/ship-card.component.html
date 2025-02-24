@@ -1,0 +1,21 @@
+<div class="container-fluid mt-5">
+  <div class="row">
+    <div class="col-12 col-xl-8 mb-4 mx-auto">
+      <div class="card d-flex flex-row">
+        <div class="imagen col-6">
+          <img [src]="getShipImageUrl(ship)" alt="descripción de la img" class="img-fluid" />
+        </div>
+        <div class="details p-3">
+          <h3>{{ ship.name }}</h3>
+          <p><strong>Modelo:</strong> {{ ship.model }}</p>
+          <p><strong>cost in credits:</strong> {{ ship.costInCredits }}</p>
+          <p><strong>length:</strong> {{ ship.length }}</p>
+          <p>
+            <strong>atmosphering speed:</strong> {{ ship.maxAatmospheringSpeed}}
+          </p>
+          <p><strong>crew:</strong> {{ ship.crew }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
