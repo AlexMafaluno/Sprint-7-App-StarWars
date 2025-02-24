@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -28,9 +29,17 @@ export class SpaceshipService {
         throw new Error('Error en la respuesta de l\'API');
       }
       const data = await response.json();
-      this.starships = data.results.map((ship:any) => ({
+      this.starships = data.results.map((ship:any, index: number) => ({
+        id: index + 1,
         name:ship.name,
-        model:ship.model
+        model:ship.model,
+        manufacturer:ship.manufacturer,
+        costInCredits:ship.cost_in_credits,
+        length:ship.length,
+        maxAatmospheringSpeed: ship.max_atmosphering_speed,
+        crew: ship.crew,
+        image:ship.url
+
       }));
       return this.starships;
     } catch (error) {
@@ -38,4 +47,10 @@ export class SpaceshipService {
       throw error;
     }
   }
-}
+
+  getShipDetails(id: string) {
+    return of(this.starships.find(ship => ship.id === Number(id))); // Simula una petición asíncrona con `of()`
+  }
+
+  }
+
