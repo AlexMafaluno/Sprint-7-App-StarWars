@@ -4,12 +4,14 @@
       @for(ship of spaceships; track ship.id){
       <div class="card mb-3">
         <a [routerLink]="['/ships', ship.id]">
-        <h2>{{ ship.name }}</h2>
-        <h4>{{ ship.model }}</h4>
-      </a>
+          <h2>{{ ship.name }}</h2>
+          <h4>{{ ship.model }}</h4>
+        </a>
       </div>
       }
     </div>
+    <div class="col-12 button mx-auto">
+      <button type="button" (click)="loadMoreShips()" class="btn btn-primary">View more</button>
+    </div>
   </div>
 </div>
-
