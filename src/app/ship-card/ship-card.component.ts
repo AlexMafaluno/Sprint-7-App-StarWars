@@ -31,8 +31,8 @@ getShipImageUrl(ship: any): string {
   //if (!ship.url) return 'assets/img/default.jpg'; // Imagen por defecto si no hay URL
 
   // Extrae el ID desde la URL de la API (Ej: "https://swapi.dev/api/starships/2/")
-  const id = ship.image.split('/').filter((part: any) => part).pop(); 
-
+  const id :string = ship.image.split('/').filter((part: any) => part).pop(); 
+  console.log(id)
   return `img/${id}.jpg`; // Retorna la ruta de la imagen local
 }
 
