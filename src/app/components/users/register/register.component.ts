@@ -2,7 +2,7 @@ import { Component, inject } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { UsersService } from '../../../services/users.service';
 import { catchError } from 'rxjs';
-import { connectAuthEmulator, createUserWithEmailAndPassword, getAuth } from 'firebase/auth';
+import { connectAuthEmulator, createUserWithEmailAndPassword, getAuth, signInWithEmailAndPassword } from 'firebase/auth';
 import { initializeApp } from 'firebase/app';
 import { environment} from '../../../../environments/environment';
 
@@ -45,7 +45,7 @@ export class RegisterComponent {
       console.log(loginEmail);
       console.log(loginPassword);
   
-      const userCredential = await createUserWithEmailAndPassword(this.auth, loginEmail, loginPassword)
+      const userCredential = await signInWithEmailAndPassword(this.auth, loginEmail, loginPassword)
       console.log(userCredential.user);
   }
 }
