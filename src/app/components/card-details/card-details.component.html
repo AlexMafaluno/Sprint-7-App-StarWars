@@ -1,13 +1,15 @@
 <div class="container-fluid">
   <div class="row">
-    <div class="d-flex col-12 col-xl-8 mb-4 mx-auto">
+    <div class="col-12 col-xl-8 mb-4 mx-auto">
         <h4>Pilots</h4>
-        <p>{{pilots.length}}</p>
+        <div class="pilots d-flex flex-row">
       @for(pilot of pilots; track pilot){
       <div class="card">
+        <img [src]="pilot.image" [alt]="pilot.name" loading="lazy" width="200">
         <p><strong>{{ pilot.name }}</strong></p>
       </div>
       }
+    </div>
     </div>
   </div>
 </div>
