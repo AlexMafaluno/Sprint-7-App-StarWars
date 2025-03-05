@@ -1,1 +1,13 @@
-<p>card-details works!</p>
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-flex col-12 col-xl-8 mb-4 mx-auto">
+        <h4>Pilots</h4>
+        <p>{{pilots.length}}</p>
+      @for(pilot of pilots; track pilot){
+      <div class="card">
+        <p><strong>{{ pilot.name }}</strong></p>
+      </div>
+      }
+    </div>
+  </div>
+</div>
