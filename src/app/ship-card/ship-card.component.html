@@ -1,11 +1,11 @@
-<div class="container-fluid mt-5">
+<div class="container-fluid mt-5 ">
   <div class="row">
     <div class="col-12 col-xl-8 mb-4 mx-auto">
-      <div class="card d-flex flex-row">
-        <div class="imagen col-6">
+      <div class="card d-flex flex-column d-md-flex flex-md-row p-3 bg-dark text-light">
+        <div class="imagen col-12 col-md-6 text-center order-md-1">
           <img [src]="getShipImageUrl(ship)" alt="descripción de la img" class="img-fluid" />
         </div>
-        <div class="details p-3">
+        <div class="details col-12 col-md-6 p-3 order-md-2">
           <h3>{{ ship.name }}</h3>
           <p><strong>Modelo:</strong> {{ ship.model }}</p>
           <p><strong>cost in credits:</strong> {{ ship.costInCredits }}</p>

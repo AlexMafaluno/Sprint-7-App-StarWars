@@ -1,19 +1,19 @@
 <div class="container-fluid">
   <div class="row">
-    <div class="col-12 col-xl-8 mb-4 mx-auto">
+    <div class="col-12 col-xl-10 mb-4 mx-auto">
         <h4>Pilots</h4>
-        <div class="pilots d-flex flex-row">
+        <div class="pilots d-flex flex-wrap">
       @for(pilot of pilots; track pilot){
-      <div class="card">
+      <div class="card-pilot text-center mx-1">
         <img [src]="pilot.image" [alt]="pilot.name" loading="lazy" width="200">
         <p><strong>{{ pilot.name }}</strong></p>
       </div>
       }
     </div>
     <h4>Films</h4>
-    <div class="films d-flex flex-row">
+    <div class="films d-flex flex-wrap">
         @for(film of films; track film){
-        <div class="card">
+        <div class="card-film text-center p-3">
           <img [src]="getFilmImageUrl(film.image)" alt="descripción de la img" loading="lazy" width="200">
           <p><strong>{{ film.title }}</strong></p>
         </div>

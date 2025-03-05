@@ -1,16 +1,16 @@
 <div class="container-fluid mt-5">
   <div class="row">
-    <div class="col-12 col-xl-8 mb-4 mx-auto">
+    <div class="col-12 col-xl-8 mx-auto">
       @for(ship of spaceships; track ship.id){
-      <div class="card mb-3">
-        <a [routerLink]="['/ships', ship.id]">
-          <h2>{{ ship.name }}</h2>
-          <h4>{{ ship.model }}</h4>
+      <div class="card mb-3 bg-dark text-light">
+        <a [routerLink]="['/ships', ship.id]" class="text-decoration-none text-light">
+          <h4>{{ ship.name }}</h4>
+          <p>{{ ship.model }}</p>
         </a>
       </div>
       }
     </div>
-    <div class="col-12 button mx-auto">
+    <div class="col-12 d-flex button mx-auto my-3 justify-content-center">
       <button type="button" (click)="loadMoreShips()" class="btn btn-primary">View more</button>
     </div>
   </div>

@@ -5,7 +5,7 @@ import { HomeComponent } from './components/home/home.component';
 import { AppComponent } from './app.component';
 
 export const routes: Routes = [
-  { path: '', component: ListStarshipsComponent },
+  { path: '', component: HomeComponent },
   { path: 'ships', component: ListStarshipsComponent },
   { path: 'ships/:id', component: ShipCardComponent },
   { path: '**', redirectTo: '/' }, // Redirige a Home si la ruta no existe
