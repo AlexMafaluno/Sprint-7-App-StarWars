@@ -2,19 +2,20 @@ import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, inject, Input, OnInit, Output } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { SpaceshipService } from '../services/spaceship.service';
+import { CardDetailsComponent } from '../components/card-details/card-details.component';
+import { PilotsService } from '../services/pilots.service';
 
 @Component({
   selector: 'app-ship-card',
-  imports: [CommonModule],
+  imports: [CommonModule, CardDetailsComponent],
   templateUrl: './ship-card.component.html',
   styleUrl: './ship-card.component.scss'
 })
 export class ShipCardComponent implements OnInit {
   
 ship: any = null;
+
 private spaceshipService = inject(SpaceshipService);
-//@Input() shipCard: any;
-//@Output() close = new EventEmitter<void>();
 
 constructor(private route: ActivatedRoute){}
 
