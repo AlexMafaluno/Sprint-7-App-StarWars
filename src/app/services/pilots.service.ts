@@ -33,10 +33,16 @@ export class PilotsService {
   transformPilots(data: any): Pilot[] {
     return data.results.map((pilot: any) => ({
       name: pilot.name,
-      image: pilot.url
+      image: this.getPilotImageUrl(pilot.url)
     }));
   };
-
+  
+  private getPilotImageUrl(url: string): string {
+    const match = url.match(/\/(\d+)\/$/); // Extrae el ID del URL
+    return match
+      ? `https://raw.githubusercontent.com/vieraboschkova/swapi-gallery/refs/heads/main/static/assets/img/people/${match[1]}.jpg`
+      : '';
+  }
 
 
 
