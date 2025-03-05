@@ -20,4 +20,4 @@
   </div>
 </div>
 
-<app-card-details *ngIf="ship.pilots.length > 0" [pilotUrls]="ship.pilots"></app-card-details>
+<app-card-details *ngIf="ship.pilots.length > 0 && ship.films.length > 0" [pilotUrls]="ship.pilots" [filmUrls]="ship.films"></app-card-details>
