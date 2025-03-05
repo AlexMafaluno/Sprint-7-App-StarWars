@@ -14,12 +14,15 @@ import { forkJoin } from 'rxjs';
 export class CardDetailsComponent implements OnInit {
 
   @Input()pilotUrls: any[] = [];
+  @Input()filmUrls: any[] = [];
   pilots: any[] = []; // Aquí se almacenarán los datos de los pilotos
+  films: any[] = [];// Aquí se almacenarán los datos de las pelis
 
   private http = inject(HttpClient); // 👈 Usa `inject` en vez de constructor
 
   ngOnInit() {
     this.loadPilots();
+    this.loadFilms();
   }
 
   loadPilots() {
@@ -39,7 +42,34 @@ export class CardDetailsComponent implements OnInit {
       );
     }
   }
-      
+   
+  
+  loadFilms() {
+    if (this.filmUrls.length > 0) {
+      // Usamos `forkJoin` para hacer todas las llamadas en paralelo
+      forkJoin(this.filmUrls.map(url => this.http.get(url))).subscribe(
+        (filmDataArray: any[]) => {
+          // Transformamos los datos agregando la imagen desde GitHub
+          this.films = filmDataArray.map((film) => ({
+            title: film.title,
+            image: film.url
+          }));
+        },
+        (error) => {
+          console.error('Error al cargar de peliculas:', error);
+        }
+      );
+    }
+  }
+  getFilmImageUrl(film: string): string {
+    //if (!ship.url) return 'assets/img/default.jpg'; // Imagen por defecto si no hay URL
+  
+    // Extrae el ID desde la URL de la API (Ej: "https://swapi.dev/api/starships/2/")
+    const id :string = film.split('/').filter((part: any) => part).pop() || ''; 
+    console.log(id)
+    return `assets/img/films/${id}.jpeg`; // Retorna la ruta de la imagen local
+  }
+  
   private getPilotImageUrl(url: string): string {
     const match = url.match(/\/(\d+)\/$/); // Extrae el ID del URL
     console.log(match);
