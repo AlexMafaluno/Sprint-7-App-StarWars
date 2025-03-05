@@ -41,7 +41,8 @@ export class SpaceshipService {
         maxAatmospheringSpeed: ship.max_atmosphering_speed,
         crew: ship.crew,
         image:this.extractId(ship.url),
-        pilots:ship.pilots
+        pilots:ship.pilots,
+        films:ship.films,
       }));
       this.starships = [...this.starships, ...newShips]; // Agregar nuevas naves
       this.page += 1;
