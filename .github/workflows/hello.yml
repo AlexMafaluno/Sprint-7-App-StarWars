@@ -5,6 +5,7 @@ on:
     branches:
       - main
       - list-starships
+      - develop
 
 jobs:
   hello_world:
