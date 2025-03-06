@@ -1,8 +1,9 @@
-<div class="container-fluid">
-    <div class="row align-center mt-5">
-      <div class="col-12 col-xl-8 justify-content-center">
-          <div class="card shadow d-flex flex-column mx-auto p-3">
-        <form [formGroup]="profileForm" (ngSubmit)="submit()">
+  <div class="container-fluid">
+    <div class="row justify-content-center mt-5">
+      <div class="col-12 col-xl-8 d-flex justify-content-center">
+          <div class="card shadow d-flex flex-column mx-auto p-3 mb-3 text-center">
+            <h3 class="card-title mb-2">Sign up</h3>
+        <form [formGroup]="profileForm">
               <div class="mb-3">
           <label for="mail">Email:</label>
           <input id="mail" type="text" formControlName="mail" required/>
@@ -11,10 +12,11 @@
           <label for="password">Password:</label>
           <input id="password" type="text" formControlName="password" required />
         </div>
-          <button type="submit" class="btn btn-success">Confirm</button>
+        <div class="col d-flex flex-column">
+          <button type="submit" (click)="createAccount()" class="btn btn-success">Sign up</button>
+        </div>
         </form>
       </div>
     </div>
   </div>
   </div>
-  
