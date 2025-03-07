@@ -12,7 +12,7 @@ jobs:
       - name: Echo the message
         run: |
           echo "Hola Alex!"
-      - name: Echo the message
+      - name: Dime la fecha
         run: |
-          echo "Que tal?"
+          date
 
