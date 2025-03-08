@@ -1,8 +1,6 @@
 import { inject, Injectable } from '@angular/core';
-import { Auth, createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword,signInWithPopup,GoogleAuthProvider, signOut, User } from '@angular/fire/auth'; // Adjust the import path as necessary
-import { Router } from '@angular/router';
+import { Auth, createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword,signInWithPopup,GoogleAuthProvider, signOut, User } from '@angular/fire/auth'; 
 import { BehaviorSubject, Observable } from 'rxjs';
-
 
 
 @Injectable({
@@ -11,7 +9,6 @@ import { BehaviorSubject, Observable } from 'rxjs';
 export class AuthService {
   private auth = inject(Auth);
   private readonly isLoggedIn = new BehaviorSubject<boolean>(false);
-  private userSubject = new BehaviorSubject<User | null>(null);
   
   isAuthenticated$(): Observable<boolean> {
   return this.isLoggedIn.asObservable();  
@@ -19,15 +16,10 @@ export class AuthService {
 
   constructor() {
     onAuthStateChanged(this.auth, (user) => {
-      console.log('AuthService - Usuario detectado:', user); // 👀 Ver si detecta el usuario
       this.isLoggedIn.next(!!user);
     });
   }
 
-  /*get user$() {
-    return this.userSubject.asObservable();
-  }
-  */
   async login(email: string, password: string) {
     return signInWithEmailAndPassword(this.auth, email, password);
   }
@@ -39,7 +31,6 @@ export class AuthService {
   async logout() {
     return signOut(this.auth);
   }
-
 
 async loginWithGoogle() {
   return signInWithPopup(this.auth, new GoogleAuthProvider());
