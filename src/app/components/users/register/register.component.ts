@@ -75,6 +75,12 @@ export class RegisterComponent {
       }
     });
   }
+  isInvalid(field: string): boolean {
+    return (
+      this.formReg.controls[field].invalid &&
+      (this.formReg.controls[field].dirty || this.formReg.controls[field].touched)
+    );
+  }
 
   ngOnInit() {
     this.monitorAuthState();

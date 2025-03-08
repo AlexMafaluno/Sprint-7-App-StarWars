@@ -11,6 +11,7 @@ import { CommonModule } from '@angular/common';
   styleUrl: './login.component.scss'
 })
 export class LoginComponent {
+ 
 formLogin: FormGroup;
 private authService = inject(AuthService);
 private router = inject(Router);
@@ -66,5 +67,13 @@ async loginEmailPassword() {
         console.error('Error al loguear con Google:', error);
       });
 
+}
+
+
+isInvalid(field: string): boolean {
+  return (
+    this.formLogin.controls[field].invalid &&
+    (this.formLogin.controls[field].dirty || this.formLogin.controls[field].touched)
+  );
 }
 }
