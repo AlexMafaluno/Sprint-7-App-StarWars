@@ -1,7 +1,8 @@
 import { TestBed } from '@angular/core/testing';
-
 import { AuthService } from './auth.service';
+import { Auth, getAuth, onAuthStateChanged, provideAuth } from '@angular/fire/auth';
 
+// Mocks de Firebase Auth
 const mockAuth = {
   currentUser: null,
   signInWithEmailAndPassword: jasmine.createSpy('signInWithEmailAndPassword').and.returnValue(Promise.resolve({ user: { email: 'test@example.com' } })),
@@ -10,12 +11,19 @@ const mockAuth = {
   signInWithPopup: jasmine.createSpy('signInWithPopup').and.returnValue(Promise.resolve({ user: { email: 'test@example.com' } }))
 };
 
-
 describe('AuthService', () => {
   let service: AuthService;
 
   beforeEach(() => {
-    TestBed.configureTestingModule({});
+    TestBed.configureTestingModule({
+      imports: [
+        provideAuth(() => getAuth()), // Configura Firebase Authentication
+      ],
+      providers: [
+        AuthService,
+        { provide: Auth, useValue: mockAuth } // Mockeamos Auth
+      ]
+    });
     service = TestBed.inject(AuthService);
   });
 
