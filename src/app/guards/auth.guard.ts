@@ -1,7 +1,7 @@
-import { CanMatchFn, Router } from '@angular/router';
+import { CanActivateFn, CanMatchFn, Router } from '@angular/router';
 import { AuthService } from '../services/auth.service';
 import { inject } from '@angular/core';
-import { take, tap } from 'rxjs';
+import { map, take, tap } from 'rxjs';
 
 
 
@@ -13,7 +13,14 @@ export const AuthGuard: CanMatchFn = () => {
   
   return authService.isAuthenticated$().pipe(
     take(1),
-    tap((isLoggedIn) =>
-      !isLoggedIn ? router.navigate(['/ships']): true)
-);
+    map((isLoggedIn) => {
+      console.log('AuthGuard - isLoggedIn:', isLoggedIn);
+      if (!isLoggedIn) {
+        console.log('AuthGuard - Redirigiendo a /register');
+        router.navigate(['/register']);
+        return false;
+      }
+      return true;
+    })
+  );
 }
