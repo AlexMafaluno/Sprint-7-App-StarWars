@@ -16,9 +16,8 @@ import { RegisterComponent } from './components/users/register/register.componen
     RouterModule,
     HeaderComponent,
     FooterComponent,
-    ReactiveFormsModule,
-    RegisterComponent
-  ],
+    ReactiveFormsModule
+],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
 })
