@@ -1,6 +1,7 @@
 
 export const environment  = {
     production: false,
+    apiBaseUrl: 'https://swapi.dev/api',
     firebaseConfig :{
         apiKey: "AIzaSyDhK8gmVsxNXt9XpRqMpBcgchRFilV6Avk",
         authDomain: "starwarsapp-52865.firebaseapp.com",
