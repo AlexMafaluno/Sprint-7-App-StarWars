@@ -7,10 +7,14 @@
               <div class="mb-3">
           <label for="mail">Email:</label>
           <input id="mail" type="text" formControlName="mail" required/>
-        </div>
+          <p *ngIf="formReg.get('mail')?.errors?.['required']">
+            El campo es requerido</p>
+          </div>
         <div class="mb-3">
           <label for="password">Password:</label>
-          <input id="password" type="text" formControlName="password" required />
+          <input id="password" type="password" formControlName="password" required />
+          <p *ngIf="formReg.get('password')?.errors?.['required']">
+            El campo es requerido</p>
         </div>
         <div class="col d-flex flex-column">
           <button type="submit" (click)="createAccount()" class="btn btn-success">Sign up</button>
