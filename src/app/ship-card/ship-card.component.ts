@@ -1,40 +1,41 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, inject, Input, OnInit, Output } from '@angular/core';
+import {
+  Component,
+  inject,
+  OnInit,
+} from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { SpaceshipService } from '../services/spaceship.service';
 import { CardDetailsComponent } from '../components/card-details/card-details.component';
-import { PilotsService } from '../services/pilots.service';
 
 @Component({
   selector: 'app-ship-card',
   imports: [CommonModule, CardDetailsComponent],
   templateUrl: './ship-card.component.html',
-  styleUrl: './ship-card.component.scss'
+  styleUrl: './ship-card.component.scss',
 })
 export class ShipCardComponent implements OnInit {
-  
-ship: any = null;
+  ship: any = null;
 
-private spaceshipService = inject(SpaceshipService);
+  private spaceshipService = inject(SpaceshipService);
 
-constructor(private route: ActivatedRoute){}
+  constructor(private route: ActivatedRoute) {}
 
-ngOnInit(): void {
-  const id: string | null = this.route.snapshot.paramMap.get('id');  // Obtener el id de la URL
-  if (id) {
-    this.spaceshipService.getShipDetails(id).subscribe(ship => {
-      this.ship = ship;
-    });  // Obtener los detalles de la nave
+  ngOnInit(): void {
+    const id: string | null = this.route.snapshot.paramMap.get('id');
+    if (id) {
+      this.spaceshipService.getShipDetails(id).subscribe((ship) => {
+        this.ship = ship;
+      });
+    }
   }
-}
 
-getShipImageUrl(ship: any): string {
-  //if (!ship.url) return 'assets/img/default.jpg'; // Imagen por defecto si no hay URL
-
-  // Extrae el ID desde la URL de la API (Ej: "https://swapi.dev/api/starships/2/")
-  const id :string = ship.image.split('/').filter((part: any) => part).pop(); 
-  console.log(id)
-  return `img/${id}.jpg`; // Retorna la ruta de la imagen local
-}
-
+  getShipImageUrl(ship: any): string {
+    const id: string = ship.image
+      .split('/')
+      .filter((part: any) => part)
+      .pop();
+    console.log(id);
+    return `img/${id}.jpg`; 
+  }
 }
