@@ -1,5 +1,5 @@
 import { Component, inject } from '@angular/core';
-import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AuthService } from '../../../services/auth.service';
 import { Router } from '@angular/router';
 
@@ -10,23 +10,23 @@ import { Router } from '@angular/router';
   styleUrl: './login.component.scss'
 })
 export class LoginComponent {
-profileForm: any;
+formLogin: FormGroup;
 private authService = inject(AuthService);
 private router = inject(Router);
 
  constructor(private fb: FormBuilder) {
-     this.profileForm = this.fb.group({
+     this.formLogin = this.fb.group({
        mail: ['', [Validators.required, Validators.email]],
        password: ['', [Validators.required, Validators.minLength(6)]],
      });
    }
 
 async loginEmailPassword() {
-    if (this.profileForm.invalid) {
+    if (this.formLogin.invalid) {
       console.log('Formulario invalido');
       return;
     }
-      const response = this.profileForm.value;
+      const response = this.formLogin.value;
       const loginEmail: string = response.mail || '';
       const loginPassword: string = response.password || '';
 
@@ -39,7 +39,7 @@ async loginEmailPassword() {
           loginPassword
         );
         console.log(userCredential.user);
-        this.router.navigate(['/login']);
+        this.router.navigate(['/ships']);
       } catch (error) {
         console.log(error);
       }
@@ -49,8 +49,21 @@ async loginEmailPassword() {
       try {
         await this.authService.logout();
         console.log('Sesión cerrada correctamente');
+        this.router.navigate(['/register']);
       } catch (error) {
         console.error('Error al cerrar sesión:', error);
       }
     }
+
+    loginGoogle() {
+      this.authService.loginWithGoogle()
+      .then( response => {
+        console.log(response);
+        this.router.navigate(['/ships']);
+      })
+      .catch( error => {
+        console.error('Error al loguear con Google:', error);
+      });
+
+}
 }
