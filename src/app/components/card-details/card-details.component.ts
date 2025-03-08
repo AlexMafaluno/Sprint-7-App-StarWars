@@ -67,7 +67,7 @@ export class CardDetailsComponent implements OnInit {
     // Extrae el ID desde la URL de la API (Ej: "https://swapi.dev/api/starships/2/")
     const id :string = film.split('/').filter((part: any) => part).pop() || ''; 
     console.log(id)
-    return `assets/img/films/${id}.jpeg`; // Retorna la ruta de la imagen local
+    return `imgFilms/${id}.jpeg`; // Retorna la ruta de la imagen local
   }
   
   private getPilotImageUrl(url: string): string {
