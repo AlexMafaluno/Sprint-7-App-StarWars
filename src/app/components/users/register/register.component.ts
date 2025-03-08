@@ -1,5 +1,5 @@
 import { Component, inject } from '@angular/core';
-import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { UsersService } from '../../../services/users.service';
 import { catchError } from 'rxjs';
 import {
@@ -15,6 +15,7 @@ import { initializeApp } from 'firebase/app';
 import { environment } from '../../../../environments/environment';
 import { Auth } from '@angular/fire/auth';
 import { AuthService } from '../../../services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -24,34 +25,28 @@ import { AuthService } from '../../../services/auth.service';
 })
 export class RegisterComponent {
   data = '';
-  profileForm;
+  formReg: FormGroup;
   private authService = inject(AuthService);
   private auth = inject(Auth);
-  // Initialize Firebase
-  //app = initializeApp(environment.firebaseConfig);
-  //auth = getAuth(this.app);
+  private router = inject(Router);
 
+  
   constructor(private fb: FormBuilder) {
-    this.profileForm = this.fb.group({
+    this.formReg = this.fb.group({
       mail: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6)]],
     });
-    // Inicializa Firebase correctamente
-    // Conectar al emulador si está activado
-    //if (environment.useEmulator) {
-    //console.log("Conectando al emulador de Auth...");
-    //connectAuthEmulator(this.auth, "http://localhost:9099");
-    //}
+
   }
 
   
   async createAccount () {
-    if (this.profileForm.invalid) {
+    if (this.formReg.invalid) {
       console.log('Formulario invalido');
       return;
     }
     
-      const response = this.profileForm.value;
+      const response = this.formReg.value;
       const loginEmail: string = response.mail || '';
       const loginPassword: string = response.password || '';
 
@@ -64,6 +59,7 @@ export class RegisterComponent {
           loginPassword
         );
         console.log(userCredential.user);
+        this.router.navigate(['/login']);
       } catch (error) {
         console.log(error);
       }
