@@ -1,0 +1,30 @@
+<div class="container-fluid">
+    <div class="row justify-content-center mt-5">
+      <div class="col-12 col-xl-8 d-flex justify-content-center">
+          <div class="card shadow d-flex flex-column mx-auto p-3 mb-3 text-center">
+            <h3 class="card-title mb-2">Log in</h3>
+        <form [formGroup]="formLogin">
+              <div class="mb-3">
+          <label for="mail">Email:</label>
+          <input id="mail" type="text" formControlName="mail" required/>
+          <p *ngIf="formLogin.get('mail')?.errors?.['required']">
+            El campo es requerido</p>
+        </div>
+        <div class="mb-3">
+          <label for="password">Password:</label>
+          <input id="password" type="password" formControlName="password" required />
+          <p *ngIf="formLogin.get('password')?.errors?.['required']">
+            El campo es requerido</p>
+        </div>
+        <div class="col d-flex flex-column">
+          <button type="button" (click)=" loginEmailPassword()" class="btn btn-success my-3">Log in</button>
+          <button type="button" (click)=" logout()" class="btn btn-success mb-3">Log out</button>
+        </div>
+        </form>
+        <button type="button" (click)="loginGoogle()" class="btn btn-info">Log in with Google</button>
+      </div>
+    </div>
+  </div>
+  </div>
+  
+
