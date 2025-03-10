@@ -6,6 +6,7 @@ import { environment } from '../../environments/environment';
   providedIn: 'root',
 })
 export class SpaceshipService {
+ 
   private apiUrl: string = `${environment.apiBaseUrl}/starships/`;
 
   private starships: any[] = [];
@@ -13,7 +14,7 @@ export class SpaceshipService {
 
   constructor() {}
 
-  async getStarShips(): Promise<any> {
+  async getStarShips(page: number = 1): Promise<any> {
     const url = `${this.apiUrl}?page=${this.page}`;
     try {
       const response = await fetch(url, {
@@ -22,12 +23,25 @@ export class SpaceshipService {
           Accept: 'application/json',
         },
       });
+
       if (!response.ok) {
-        throw new Error("Error en la respuesta de l'API");
+        console.warn("Error en la respuesta de l'API");
+        return this.starships;
       }
+
       const data = await response.json();
+
+      if (!data.results || data.results.length === 0) {
+        console.warn('No se encontraron más naves.');
+        return this.starships;
+      }
+
       const newShips = this.mapStarships(data.results);
-      this.updateStarships(newShips);
+      if (newShips.length > 0) {
+        this.updateStarships(newShips);
+      } else {
+        console.warn('No se agregaron nuevas naves.');
+      }
       return this.starships;
     } catch (error) {
       console.error('Ha habido un error:', error);
@@ -37,8 +51,6 @@ export class SpaceshipService {
 
   private extractId(url: string): string {
     const parts = url.split('/').filter((part) => part);
-    console.log(parts);
-    console.log(parts[parts.length - 1]);
     return parts[parts.length - 1];
   }
 
@@ -67,8 +79,13 @@ export class SpaceshipService {
     }));
   }
 
-  private updateStarships(newShips: any[]): void {
+  public updateStarships(newShips: any[]): void {
+    if (newShips.length === 0) {
+      console.warn('No hay más naves disponibles.');
+      return; // No incrementamos `this.page` si ya no hay más naves
+    }
     this.starships = [...this.starships, ...newShips];
     this.page += 1;
+    
   }
 }
