@@ -42,5 +42,6 @@ testem.log
 Thumbs.db
 
 node_modules
-
 eslint.config.mjs
+src/environments/environments.ts
+.env
