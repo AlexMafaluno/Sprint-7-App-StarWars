@@ -11,6 +11,6 @@ export const environment  = {
         appId: "1:348253267871:web:9069e15175f10c7df53faa",
         measurementId: "G-T6FX949DYG"
     },
-    useEmulator: false // Activa el emulador
+    useEmulator: false 
     };
 
