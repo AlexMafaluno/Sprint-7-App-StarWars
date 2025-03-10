@@ -1,22 +1,20 @@
 import { Component, inject, Input, OnInit } from '@angular/core';
-import { HttpClient} from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { forkJoin } from 'rxjs';
 
 @Component({
   selector: 'app-card-details',
   imports: [],
   templateUrl: './card-details.component.html',
-  styleUrl: './card-details.component.scss'
+  styleUrl: './card-details.component.scss',
 })
-
 export class CardDetailsComponent implements OnInit {
-
-  @Input()pilotUrls: any[] = [];
-  @Input()filmUrls: any[] = [];
-  pilots: any[] = []; 
+  @Input() pilotUrls: any[] = [];
+  @Input() filmUrls: any[] = [];
+  pilots: any[] = [];
   films: any[] = [];
 
-  private http = inject(HttpClient); 
+  private http = inject(HttpClient);
 
   ngOnInit() {
     this.loadPilots();
@@ -25,7 +23,7 @@ export class CardDetailsComponent implements OnInit {
 
   loadPilots() {
     if (this.pilotUrls.length > 0) {
-      forkJoin(this.pilotUrls.map(url => this.http.get(url))).subscribe(
+      forkJoin(this.pilotUrls.map((url) => this.http.get(url))).subscribe(
         (pilotDataArray: any[]) => {
           this.pilots = pilotDataArray.map((pilot) => ({
             name: pilot.name,
@@ -38,15 +36,14 @@ export class CardDetailsComponent implements OnInit {
       );
     }
   }
-   
-  
+
   loadFilms() {
     if (this.filmUrls.length > 0) {
-      forkJoin(this.filmUrls.map(url => this.http.get(url))).subscribe(
+      forkJoin(this.filmUrls.map((url) => this.http.get(url))).subscribe(
         (filmDataArray: any[]) => {
           this.films = filmDataArray.map((film) => ({
             title: film.title,
-            image: film.url
+            image: film.url,
           }));
         },
         (error) => {
@@ -56,13 +53,17 @@ export class CardDetailsComponent implements OnInit {
     }
   }
   getFilmImageUrl(film: string): string {
-    const id :string = film.split('/').filter((part: any) => part).pop() || ''; 
-    console.log(id)
+    const id: string =
+      film
+        .split('/')
+        .filter((part: any) => part)
+        .pop() || '';
+    console.log(id);
     return `imgFilms/${id}.jpeg`;
   }
-  
+
   private getPilotImageUrl(url: string): string {
-    const match = url.match(/\/(\d+)\/$/); // Extrae el ID del URL
+    const match = url.match(/\/(\d+)\/$/);
     console.log(match);
     return match
       ? `https://raw.githubusercontent.com/vieraboschkova/swapi-gallery/refs/heads/main/static/assets/img/people/${match[1]}.jpg`
