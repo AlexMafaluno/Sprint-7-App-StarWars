@@ -29,13 +29,14 @@ export class LoginComponent {
 
   async loginEmailPassword() {
     if (this.formLogin.invalid) {
-      console.log('Formulario invalido');
+      window.alert('Inicio de sesión invalido');
       return;
     }
     const { mail, password } = this.formLogin.value;
     try {
       this.authService.login(mail, password);
       this.router.navigate(['/ships']);
+      window.alert('inicio de sesión con éxito');
     } catch (error) {
       console.error(error);
     }
@@ -44,7 +45,7 @@ export class LoginComponent {
   async logout() {
     try {
       await this.authService.logout();
-      console.log('Sesión cerrada correctamente');
+      window.alert('Sesión cerrada correctamente');
       this.router.navigate(['/register']);
     } catch (error) {
       console.error('Error al cerrar sesión:', error);
