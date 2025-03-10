@@ -30,13 +30,14 @@ export class RegisterComponent {
 
   async createAccount() {
     if (this.formReg.invalid) {
-      console.error('Formulario invalido');
+      window.alert('Registro invalido');
       return;
     }
     const { mail, password } = this.formReg.value;
     try {
       this.authService.register(mail, password);
       this.router.navigate(['/login']);
+      window.alert('Registro creado con éxito');
     } catch (error) {
       console.error(error);
     }
