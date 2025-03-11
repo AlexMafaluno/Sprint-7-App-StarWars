@@ -43,5 +43,6 @@ Thumbs.db
 
 node_modules
 eslint.config.mjs
-src/environments/environments.ts
+/src/environments/environment.ts
 .env
+
