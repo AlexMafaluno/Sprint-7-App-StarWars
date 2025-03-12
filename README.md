@@ -25,7 +25,7 @@ El objetivo principal de esta aplicación es consumir los datos de una API, most
 
 ```bash
 Copiar código
-https://github.com/AlexMafaluno/Sprint6-budget.git
+https://github.com/AlexMafaluno/Sprint-7-App-StarWars.git
 ```
 ## Ejecutar servidor
 
@@ -71,5 +71,3 @@ ng test
 ## despliegue en Vercel(demo)
 
 La aplicación está desplegada en Vercel y accesible en el enlace visible en el repositorio.
-
-## Capturas de pantalla
